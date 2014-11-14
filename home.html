@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>API Rocks</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Web API Team
+                    </a>
+                </li>
+                <li>
+                    <a href="#">REST</a>
+                </li>
+                <li>
+                    <a href="watson.html">Watson SDK</a>
+                </li>
+                <li>
+                    <a href="#">NoSql DB</a>
+                </li>
+                <li>
+                    <a href="#">Response Format</a>
+                </li>
+                <li>
+                    <a href="references.html">References</a>
+                </li>
+                <li>
+                    <a href="aboutus.html">About Us</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <header class="jumbotron subhead" id="overview">
+                    <div class="container">
+                        <h1>Web API Team Presentation</h1>
+                        <p class="lead">CSE 5914 - Knowledge Based Capstone</p>
+                    </div>
+                </header>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Sidebar</a>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>Basics of REST</h3>
+                        <p>REST (REpresentational State Transfer) is a simple stateless architecture that generally runs over HTTP.REST is often used in mobile applications, social networking Web sites, mashup tools and automated business processes. The REST style emphasizes that interactions between clients and services is enhanced by having a limited number of operations (verbs). Flexibility is provided by assigning resources (nouns) their own unique universal resource indicators (URIs). Because each verb has a specific meaning (GET, POST, PUT and DELETE), REST avoids ambiguity.</p>
+                        <p>It is resource based unlike action based. When I say resource based I mean that various endpoints of an api correspond to some resources which could be a database or an outcome of a computing algorithm. Where as action based means telling the machine what to do like GET or Post. So with rest we get the resource information rather doing actions unlike soap.</p>
+                        <p>The resources are manipulated to be represented in any way which can be used in the desirable form. It can be represented as whole or a part of itself. Can be represented as json or xml. For example, resource = person(Ravi), Service= contact information(GET), representaion=name, address, phone number, json/xml.</p>
+                        <p>Following are the six constraints required for an API to qualify as REST:</p>
+                        <ul>
+
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#uniform-interface" data-parent="#constraint-accordian">Uniform Interface</a>
+                            <div class="collapse" id="uniform-interface" style="height: 0px;">
+                                <p>It defines the interface between a client and a server. In broad sense it means that REST gets identified by http verbs(PUT, GET, POST, DELETE), resource(uri) and response(status and body) which simplifies and decouples the architecture which in turn enables each part of the application to evolve independently. The four guiding principles of Uniform Interfaces are:</p>
+                                <ul>
+                                    <li>Resource Based 
+                                        <p>As explained above.</p>   
+                                    </li>
+                                    <li>Manipulaltion of Resources through Representation
+                                        <p>As explained above.</p> 
+                                    </li>
+                                    <li>Self descriptive Messages
+                                        <p>Each message is packed with enough information, which describes to process itself.</p>
+                                    </li>
+                                    <li>Hypermedia as the Engine of Application State (HATEOAS)
+                                        <p>Services deliver state to clients via body content, response codes, and response headers. This is technically referred-to as hypermedia (or hyperlinks within hypertext).</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#stateless" data-parent="#constraint-accordian">Stateless</a>
+                            <div class="collapse" id="stateless" style="height: 0px;">
+                                <p>It means that state which is required to handle the request is contained within the request itself, either as part of the URI, query-string parameters, body, or headers. This allows servers not to take part in the state and session maintenance at client's end.</p>
+                            </div>
+                        </li>
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#cacheable" data-parent="#constraint-accordian">Cacheable</a>
+                            <div class="collapse" id="cacheable" style="height: 0px;">
+                                <p>As on the World Wide Web, clients can cache responses. Responses must therefore, implicitly or explicitly, define themselves as cacheable, or not, to prevent clients reusing stale or inappropriate data in response to further requests. Well-managed caching partially or completely eliminates some client–server interactions, further improving scalability and performance.</p>
+                            </div>
+                        </li>
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#client-server" data-parent="#constraint-accordian">Client Server</a>
+                            <div class="collapse" id="client-server" style="height: 0px;">
+                                <p>Rest assumes interaction between disconnected components. Uniform interface constraint links both of them.</p>
+                            </div>
+                        </li>
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#layered-system" data-parent="#constraint-accordian">Layered System</a>
+                            <div class="collapse" id="layered-system" style="height: 0px;">
+                                <p>It represents both client-server and cacheability constraints. There could be software or hardware intermediaries between client and server. And the client could take the data from the cache before it expires in it before refreshing the same from the darabase.</p>
+                            </div>
+                        </li>
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#code-on-demand" data-parent="#constraint-accordian">Code on Demand</a>
+                            <div class="collapse" id="code-on-demand" style="height: 0px;">
+                                <p>Server can send logic to the client in form of java applets or javascript. and this is option constraint, which means that an api can qualify as REST without complying with this particular  constraint.</p>
+                            </div>
+                        </li>
+                        </ul>
+                        <p> Abiding to the REST architecture by designing the API in accordance to the above mentioned constraint would ensure any distributed application infrastructure to have all desirable properties like performance, scalability, simplicity, modifiability, visibility, portability and reliability.<p>
+                        
+                    </div>
+                    <div class="col-lg-12">
+                        <h3>REST or Web-Service, which one to choose? You Decide.</h3>
+                        <p><h4>Rest</h4></p>
+                        <ul>
+                            <li>The RESTful Web services are completely stateless. This can be tested by restarting the server and checking if the interactions are able to survive.</li>
+                            <li>Restful services provide a good caching infrastructure over HTTP GET method (for most servers). This can improve the performance, if the data the Web service returns is not altered frequently and not dynamic in nature.</li>
+                            <li>The service producer and service consumer need to have a common understanding of the context as well as the content being passed along as there is no standard set of rules to describe the REST Web services interface.</li>
+                            <li>It is particularly useful for restricted-profile devices such as mobile and PDAs for which the overhead of additional parameters like headers and other SOAP elements are less.</li>
+                            <li>It services are easy to integrate with the existing websites and are exposed with XML so the HTML pages can consume the same with ease. There is hardly any need to refactor the existing website architecture. This makes developers more productive and comfortable as they will not have to rewrite everything from scratch and just need to add on the existing functionality.</li>
+                            <li>It-based implementation is simple compared to SOAP.</li>
+                        </ul>
+
+                        <p><h4>Webservice</h4></p>
+                        <ul>
+                            <li>The Web Services Description Language (WSDL) contains and describes the common set of rules to define the messages, bindings, operations and location of the Web service. WSDL is a sort of formal contract to define the interface that the Web service offers.</li>
+                            <li>It requires less plumbing code than REST services design, (i.e., transactions, security, coordination, addressing, trust, etc.) Most real-world applications are not simple and support complex operations, which require conversational state and contextual information to be maintained. With the SOAP approach, developers need not worry about writing this plumbing code into the application layer themselves.</li>
+                            <li>Web services (such as JAX-WS) are useful in handling asynchronous processing and invocation.</li>
+                            <li>It supports several protocols and technologies, including WSDL, XSDs, SOAP, WS-Addressing</li>
+                    </div>
+                    <div class="col-lg-12">
+                        <h3>Some Useful API's.</h3>
+                        <p><h4>BleuMix</h4></p>
+                        <p>Following features can be leveraged in an aplication using the bleumix set of natural language processiong api's.</p>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <ul>
+                                    <li>Concept identification/expansion</li>
+                                    <li>Language identification</li>
+                                    <li>Machine translation</li>
+                                    <li>Question/Answer</li>
+                                    <li>Relation Extraction</li>
+                                    <li>User Modeling</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/apis/"><img class="img-responsive" src="images/bm.jpeg" alt=""  width="40%"/></a>
+                            </div>
+                        </div>
+                       
+
+                        <p><h4>Alchemy</h4></p>
+                        <p>Apart from the features mentioned above, Alchemy api provides following two features to be exploited in an application.</p>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <ul>
+                                    <li>Sentiment Analysis</li>
+                                    <li>KeyWord Extraction</li>
+                                    <li>Entity Extraction</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <a href="http://www.alchemyapi.com/products/"><img class="img-responsive" src="images/aa.jpeg" alt="" width="50%"/></a>
+                            </div>
+                        </div> 
+                    </div>
+                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle1">Toggle Sidebar</a>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    $("#menu-toggle1").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

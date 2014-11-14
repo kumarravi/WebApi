@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>API Rocks</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Web API Team
+                    </a>
+                </li>
+                <li>
+                    <a href="home.html">REST</a>
+                </li>
+                <li>
+                    <a href="#">Watson SDK</a>
+                </li>
+                <li>
+                    <a href="#">NoSql DB</a>
+                </li>
+                <li>
+                    <a href="#">Response Format</a>
+                </li>
+                <li>
+                    <a href="references.html">References</a>
+                </li>
+                <li>
+                    <a href="aboutus.html">About Us</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <header class="jumbotron subhead" id="overview">
+                <div class="container">
+                    <h1>Web API Team Presentation</h1>
+                    <p class="lead">CSE 5914 - Knowledge Based Capstone</p>
+                </div>
+                </header>
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Sidebar</a>
+            
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>Watson SDK</h3>
+                        <p>One can create a natural language <i>question answering</i> system with IBM Watson and Bluemix service or any other natural language processing providing service as mentioned on the REST page. We would need to download the <a href="https://watson-wdc01.ihost.com/instance/501/predeploy/devportal/api/sdk/download">watson sdk</a> and install it according to the platform being used to develop the application</p>
+                        <p>Following are some code snippets that can be used to access watson instance according to the various platforms:</p>
+                        <ul>
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#java" data-parent="#constraint-accordian">JAVA</a>
+                            <p>To use the sdk with a JAVA application one would have to import the sdk as an <i>existing project</i> into their current workspace. After that, the imported project should be added as the source into it. The following JAVA code given below could be used to access the watson instance.</p>
+                            <div class="collapse" id="java" style="height: 0px;">
+                                <pre>  
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+
+import org.apache.commons.codec.binary.Base64;
+
+
+
+public class WatsonTest {
+    
+    public static void main(String[] args) throws Exception {
+        String id = "GIVE YOUR ID HERE";
+        String passwd = "GIVE YOUR PASSWORD";   
+        
+        
+        question = question.concat("GIVE YOUR ANSWER");
+        
+        URL watsonURL = new URL("https://watson-wdc01.ihost.com/instance/501/deepqa/v1/question");
+        HttpURLConnection conn = (HttpURLConnection) watsonURL.openConnection();
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Accept", "application/json");
+        conn.setRequestProperty("X-SyncTimeout", "30");
+        
+        String auth = new String(Base64.encodeBase64String((id + ":" + passwd).getBytes()));
+        conn.setRequestProperty("Authorization", "Basic " + auth);
+        conn.setDoOutput(true);
+        
+        String qjson = "{\"question\" : {\"questionText\":\"" + question + "}}";
+
+        conn.getOutputStream().write(qjson.getBytes());
+        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String inputLine;
+
+        inputLine = in.readLine();
+        System.out.println(inputLine);
+        
+        in.close();
+    }
+}
+                                </pre>
+                            </div>
+                        </li>
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#php" data-parent="#constraint-accordian">PHP</a>
+                            <p>Integrating watson with php is pretty straight forward and does not require installation of any sdk or inclusion of any file. Using a simple http request as shown below, can be used to access watson.</p>
+                            <div class="collapse" id="php" style="height: 0px;">
+                                <pre>
+$question = "YOUR QUESTION HERE";
+
+$username = "GIVE YOUR ID HERE";
+$password = "GIVE YOUR PASSWORD";
+$authString = "Basic " . base64_encode($username . ":" . $password);
+
+$watsonURL = "https://watson-wdc01.ihost.com/instance/501/deepqa/v1/question";
+
+$questionInfo='{"question":{ "questionText":"' . $question .'", "formattedAnswer":true}}';
+
+$options = array(
+    "http" => array(
+        "header" => "X-SyncTimeout: 30\r\n" .
+                    "Content-Type: application/json\r\n" .
+                    "Accept: application/json\r\n" .
+                    "Authorization: " . $authString . "\r\n",
+        "method" => "POST",
+        "content" => $questionInfo,
+    ),
+);
+
+$context = stream_context_create($options);
+
+$result = file_get_contents($watsonURL, false, $context);
+
+$watsonResult = json_decode($result);
+$answers = $watsonResult->{"question"}->{"answers"};
+$evidence = $watsonResult->{"question"}->{"evidencelist"};
+
+$response = $answers[0];
+
+                                </pre>
+                            </div>
+                        </li>
+                        <li type="square">
+                            <a data-toggle="collapse" data-target="#javascript" data-parent="#constraint-accordian">Javascript</a>
+                            <p>Using javascript to quesrry watson is not straight forward, since it involves installation of <i>node.js</i> for the api call to work.</p>
+                            <div class="collapse" id="javascript" style="height: 0px;">
+                                <pre>
+var express = require('express');
+var https = require('https');
+var url = require('url');
+
+// setup middleware
+
+var app = express();
+app.use(express.errorHandler());
+app.use(express.urlencoded()); // to support URL-encoded bodies
+app.use(app.router);
+
+app.use(express.static(__dirname + '/public')); //setup static public directory
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
+
+// There are many useful environment variables available in process.env.
+// VCAP_APPLICATION contains useful information about a deployed application.
+
+var appInfo = JSON.parse(process.env.VCAP_APPLICATION || "{}");
+// TODO: Get application information and use it in your app.
+
+// defaults for dev outside bluemix
+
+var service_url = '<service_url>';
+var service_username = '<service_username>';
+var service_password = '<service_password>';
+
+// VCAP_SERVICES contains all the credentials of services bound to
+// this application. For details of its content, please refer to
+// the document or sample of each service.
+
+if (process.env.VCAP_SERVICES) {
+  console.log('Parsing VCAP_SERVICES');
+  var services = JSON.parse(process.env.VCAP_SERVICES);
+
+//service name, check the VCAP_SERVICES in bluemix to get the name of the services you have
+
+var service_name = 'question_and_answer';
+
+  if (services[service_name]) {
+    var svc = services[service_name][0].credentials;
+    service_url = svc.url;
+    service_username = svc.username;
+    service_password = svc.password;
+  } else {
+    console.log('The service '+service_name+' is not in the VCAP_SERVICES, did you forget to bind it?');
+  }
+
+} else {
+  console.log('No VCAP_SERVICES found in ENV, using defaults for local development');
+}
+
+console.log('service_url = ' + service_url);
+console.log('service_username = ' + service_username);
+console.log('service_password = ' + new Array(service_password.length).join("X"));
+
+var auth = "Basic " + new Buffer(service_username + ":" +    service_password).toString("base64");
+
+// render index page
+
+app.get('/', function(req, res){
+    res.render('index');
+});
+
+// Handle the form POST containing the question to ask Watson and reply with the answer
+
+app.post('/', function(req, res){
+
+// Select healthcare as endpoint 
+
+var parts = url.parse(service_url +'/v1/question/healthcare');
+// create the request options to POST our question to Watson
+
+var options = { host: parts.hostname,
+    port: parts.port,
+    path: parts.pathname,
+    method: 'POST',
+    headers: {
+      'Content-Type'  :'application/json',
+      'Accept':'application/json',
+      'X-synctimeout' : '30',
+      'Authorization' :  auth }
+  };
+
+// Create a request to POST to Watson
+
+var watson_req = https.request(options, function(result) {
+    result.setEncoding('utf-8');
+    var response_string = '';
+
+    result.on('data', function(chunk) {
+      response_string += chunk;
+    });
+
+    result.on('end', function() {
+      var answers_pipeline = JSON.parse(response_string),
+          answers = answers_pipeline[0];
+      return res.render('index',{'questionText': req.body.questionText, 'answers': answers})
+   })
+
+  });
+
+  watson_req.on('error', function(e) {
+    return res.render('index', {'error': e.message})
+  });
+
+// create the question to Watson
+
+var questionData = {
+    'question': {
+      'evidenceRequest': { 
+        'items': 5 // the number of anwers
+      },
+      'questionText': req.body.questionText // the question
+    }
+  };
+
+// Set the POST body and send to Watson
+
+ watson_req.write(JSON.stringify(questionData));
+ watson_req.end();
+
+});
+
+// The IP address of the Cloud Foundry DEA (Droplet Execution Agent) that hosts this application:
+
+var host = (process.env.VCAP_APP_HOST || 'localhost');
+// The port on the DEA for communication with the application:
+
+var port = (process.env.VCAP_APP_PORT || 3000);
+// Start server
+
+app.listen(port, host);
+
+                                </pre>
+                            </div>
+                        </li>
+                        
+                        </ul>
+                        <p>*Disclaimer: The code provided above which is in java and php is tested and verified whereas the one implemented in javascript is taken from a forum and is not verified. The intention of keeping it here is to give an insight to the approach that can be used to access watson using javascript.<p>
+                        
+                    </div>                    
+                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle1">Toggle Sidebar</a>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    $("#menu-toggle1").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
